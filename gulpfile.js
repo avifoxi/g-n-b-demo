@@ -3,35 +3,53 @@
 var gulp       = require('gulp');
 var babelify   = require('babelify');
 var browserify = require('browserify');
+var watchify   = require('watchify');
 var fs         = require('fs');
-var watch      = require('gulp-watch');
+var server     = require('gulp-server-livereload');
+var sourcemaps = require('gulp-sourcemaps');
+var source     = require('vinyl-source-stream');
+var buffer     = require('vinyl-buffer');
+var babel      = require('babelify');
 
-var build = function () {
-  console.log("Build started...");
-  var timer_name = "Build complete";
-  console.time(timer_name);
+function compile(watch) {
+  var bundler = watchify(browserify('./app/client.js', { debug: true }).transform(babelify));
 
-  // from babel's example setup.
-  // see https://babeljs.io/docs/setup/#browserify
-  browserify({ debug: true })
-    .transform(babelify)
-    .require("./app/client.js", { entry: true })
-    .bundle()
-    .on("error", function (err) {
-      console.log("error: " + err.message);
-    })
-    .on('end', function() {
-      console.timeEnd(timer_name);
-    })
-    .pipe(fs.createWriteStream("./public/bundle.js"))
+  function rebundle() {
+    bundler.bundle()
+      .on('error', function(err) { console.error(err); this.emit('end'); })
+      .pipe(source('./bundle.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('./public'))
+  }
+
+  if (watch) {
+    bundler.on('update', function() {
+      console.log('-> bundling...');
+      rebundle();
+    });
+  }
+
+  rebundle();
+}
+
+function watch() {
+  return compile(true);
 };
 
-gulp.task('build', function () {
-  build();
-});
-
-gulp.task('watch', function () {
-  return watch('./app/**/*.js', build);
-});
+gulp.task('build', function() { return compile(); });
+gulp.task('watch', function() { return watch(); });
 
 gulp.task('default', ['watch']);
+
+gulp.task('webserver', function() {
+  gulp.src('public')
+    .pipe(server({
+      defaultFile: 'index.html',
+      livereload: true,
+      open: true
+    }));
+});
+
+gulp.task('default', ['watch', 'webserver']);
