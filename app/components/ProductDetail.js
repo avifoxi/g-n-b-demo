@@ -39,8 +39,6 @@ var ProductDetail = React.createClass({
 	          <p>
 	          	{this.props.product.description}
 	          </p>
-
-
 	          <hr />
 	        </Modal.Body>
 	        <Modal.Footer>
@@ -53,16 +51,5 @@ var ProductDetail = React.createClass({
 });
 
 module.exports = ProductDetail;
-
-
-// small
-// price_per
-// weight_per
-// units_in_stock
-// medium
-// large
-
-
-
 
 

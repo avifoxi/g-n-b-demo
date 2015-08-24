@@ -1,3 +1,5 @@
+import randomKey from '../utils/randomKeyGen.js';
+
 var _product_mock_data = [
 	{
 		name: 'Duck Bacon',
@@ -7,23 +9,26 @@ var _product_mock_data = [
 			hi_res: '/images/duck_bacon.jpeg',
 			thumb: '/images/duck_bacon.jpeg'
 		},
-		inventory: {
-			'small': {
+		sellable_units: [
+			{
+				id: randomKey(),
 				price_per: 5,
 				weight_per: 1,
 				units_in_stock: 2
 			}, 
-			'medium': {
+			{
+				id: randomKey(),
 				price_per: 10,
 				weight_per: 2,
 				units_in_stock: 6
 			}, 
-			'large': {
+			{
+				id: randomKey(),
 				price_per: 15,
 				weight_per: 3,
 				units_in_stock: 4
 			}
-		}
+		]
 	},
 	{
 		name: 'Treif Bacon',
@@ -33,23 +38,26 @@ var _product_mock_data = [
 			hi_res: '/images/treif_bacon.jpeg',
 			thumb: '/images/treif_bacon.jpeg'
 		},
-		inventory: {
-			'small': {
+		sellable_units: [
+			{
+				id: randomKey(),
 				price_per: 4,
 				weight_per: 0.75,
 				units_in_stock: 2
 			}, 
-			'medium': {
+			{
+				id: randomKey(),
 				price_per: 7,
 				weight_per: 1.5,
 				units_in_stock: 6
 			}, 
-			'large': {
+			{
+				id: randomKey(),
 				price_per: 9,
 				weight_per: 2,
 				units_in_stock: 4
 			}
-		}
+		]
 	}
 ]
 

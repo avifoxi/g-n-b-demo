@@ -21,6 +21,7 @@ import randomKey from '../utils/randomKeyGen.js';
 
 // COMPONENTS
 import ProductDetail from './ProductDetail.js';
+import AddToCart from './AddToCartUnitSelector.js';
 
 function getState(){
   return {
@@ -47,7 +48,7 @@ var ProductsList = React.createClass({
             <h3>{ product.name }</h3>
             <p>{ product.description }</p>
             <p>
-              <Button bsStyle='primary' onClick={ this.addToCart }>Add To Cart</Button>&nbsp;
+              <AddToCart sellable_units={product.sellable_units} />
               <ProductDetail product={product} />
             </p>
           </Thumbnail>
