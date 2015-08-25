@@ -8,9 +8,7 @@ import Input from 'react-bootstrap/lib/Input';
 import randomKey from '../utils/randomKeyGen.js';
 import range from 'lodash/utility/range.js';
 
-import find from 'lodash/collection/find.js';
-
-// import ProductsStore from '../stores/Products.js';
+import CustomerStore from '../stores/Customer.js';
 
 var AddToCart = React.createClass({
 	getInitialState: function(){
@@ -27,9 +25,7 @@ var AddToCart = React.createClass({
 	},
 	handleSelect: function(e){
 		let index = e.target.selectedIndex;
-		let selected = find(this.props.sellable_units, function(u){
-			return u.id = e.target.children[index].id
-		});
+		let selected = this.props.sellable_units[ index ];
 		this.setState({
 			selected: selected
 		})
@@ -41,35 +37,37 @@ var AddToCart = React.createClass({
 		});
 	},
 	addToCart: function(){
-		console.log(this.state);
+		CustomerStore.addToCart({
+			sellable_unit_id: this.state.selected.id,
+			quantity: this.state.quantity
+		});
 	},
 	render: function () {
+		let selected = this.state.selected;
 		let sellableUnits = this.props.sellable_units.map(function(unit, i){
     	return ( 
-    		<option key={ randomKey() } id={unit.id} >
+    		<option key={ randomKey() } value={unit.id}>
     			{unit.weight_per} lbs || ${unit.price_per}
     		</option>
     	);
-		});
+		}.bind(this));
 		let quantityRange = range( 0, this.state.selected.units_in_stock ).map(function(num){
-			debugger;
 			return( 
 				<option key={ randomKey() } >
     			{ num + 1 }
     		</option>
 			);
 		}.bind(this));
-
 		return (
 			<div>
         <Button bsStyle='primary' onClick={ this.toggle } >
           Order Options
         </Button>
         <Panel collapsible expanded={this.state.open}>
-  				<Input type='select' label='Choose Your Type' onChange={this.handleSelect} >
+  				<Input type='select' label='Choose Your Type' value={this.state.selected.id} onChange={this.handleSelect} >
 			      {sellableUnits}
 			    </Input>
-			    <Input type='select' label='Number of Units' onChange={this.handleQuant}>
+			    <Input type='select' label='Number of Units' value={this.state.quantity} onChange={this.handleQuant}>
 			      { quantityRange }
 			    </Input>
 			    <Button bsStyle='success' onClick={ this.addToCart } >

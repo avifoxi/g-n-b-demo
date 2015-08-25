@@ -1,16 +1,10 @@
+import PageParent from '../components/PageParent.js';
+
 var _name = 'Madam Customer';
 var _cart = [
-	// { 
-	// 	sellable_id: ,
-	// 	units: 4
-	// },
-	// { 
-	// 	sellable_id: ,
-	// 	sellable_units: 2
-	// },
-	// { 
-	// 	sellable_id: ,
-	// 	sellable_units: 7
+	// {
+	// 	sellable_unit_id:
+	// 	quantity:
 	// }
 ];
 
@@ -22,8 +16,10 @@ var CustomerStore = {
 			cart: _cart
 		}
 	},
-	addToCart: function(){
-
+	addToCart: function( sellableUnitIDQuant ){
+		_cart.push( sellableUnitIDQuant );
+		PageParent.refreshState();
+		debugger;
 	},
 	removeFromCart: function(){
 

@@ -6,19 +6,9 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 import Nav from 'react-bootstrap/lib/Nav';
 import CollapsibleNav from 'react-bootstrap/lib/CollapsibleNav';
 
-import CustomerStore from '../stores/Customer.js';
-
 import ShoppingCart from './ShoppingCart.js';
 
-function getState(){
-	return CustomerStore.getCustomer();
-	// this returns customer name, and items in cart
-}
-
 var NavBar = React.createClass({
-	getInitialState: function(){
-		return getState();
-	},
 	render: function () {
 		return (
 			<Navbar brand='TREIF AND MORE TREIF!' toggleNavKey={0}>
@@ -28,7 +18,7 @@ var NavBar = React.createClass({
 			      <NavItem>Link</NavItem>
 		      </Nav> 
 		      <Nav navbar right>
-		      	<ShoppingCart name={this.state.name} cart={this.state.cart}/>
+		      	<ShoppingCart name={this.props.name} cart={this.props.cart}/>
 					</Nav>		
 		    </CollapsibleNav>
 		  </Navbar>
