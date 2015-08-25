@@ -1,4 +1,4 @@
-import PageParent from '../components/PageParent.js';
+import BaconDispatcher from '../dispatchers/BaconDispatcher.js';
 
 var _name = 'Madam Customer';
 var _cart = [
@@ -17,6 +17,11 @@ var CustomerStore = {
 		}
 	},
 	addToCart: function( sellableUnitIDQuant ){
+		BaconDispatcher.handleAction({
+      actionType: FluxCartConstants.CART_ADD,
+      sku: sku,
+      update: update
+    })
 		_cart.push( sellableUnitIDQuant );
 		PageParent.refreshState();
 		debugger;
