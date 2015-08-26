@@ -79,5 +79,4 @@ var AddToCart = React.createClass({
 	}
 });
 
-window.range = range;
 module.exports = AddToCart;
