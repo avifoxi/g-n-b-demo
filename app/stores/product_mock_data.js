@@ -58,6 +58,64 @@ var _product_mock_data = [
 				units_in_stock: 4
 			}
 		]
+	},
+	{
+		name: 'Beef Bacon',
+		category: ['Beef'],
+		description: 'Pork chop venison drumstick landjaeger, boudin meatloaf pork belly pork loin ball tip hamburger turducken shank salami bresaola jerky. Cupim corned beef meatloaf, pork loin leberkas fatback hamburger salami tongue tail turkey cow. Filet mignon tenderloin porchetta salami shoulder, capicola kevin beef ribs pancetta short loin pastrami andouille kielbasa pork leberkas. Short loin pork belly jerky picanha frankfurter porchetta shank chuck filet mignon sausage tenderloin meatloaf. Leberkas corned beef prosciutto venison pork loin pancetta frankfurter chicken fatback ground round. Spare ribs frankfurter jowl t-bone pork chop jerky andouille meatball flank, ham hock short ribs pork loin venison. Landjaeger chicken doner strip steak salami bacon cow prosciutto.',
+		image_urls: {
+			hi_res: '/images/beef_bacon.jpg',
+			thumb: '/images/beef_bacon.jpg'
+		},
+		sellable_units: [
+			{
+				id: randomKey(),
+				price_per: 1,
+				weight_per: 100,
+				units_in_stock: 2
+			}, 
+			{
+				id: randomKey(),
+				price_per: 1.50,
+				weight_per: 150,
+				units_in_stock: 6
+			}, 
+			{
+				id: randomKey(),
+				price_per: 1.75,
+				weight_per: 399,
+				units_in_stock: 23
+			}
+		]
+	},
+	{
+		name: 'Turkey Bacon',
+		category: ['Turkey', 'Sale'],
+		description: 'Bacon ipsum dolor amet beef ribs jowl filet mignon flank short ribs frankfurter. Spare ribs drumstick ground round pork loin ham, shankle short loin. Tail tongue capicola, brisket bacon kevin doner ham. Kevin leberkas pork boudin. Brisket strip steak cow, spare ribs meatloaf jerky short ribs pork chop shank picanha ham short loin flank pig chicken.',
+		image_urls: {
+			hi_res: '/images/turkey_bacon.jpeg',
+			thumb: '/images/turkey_bacon.jpeg'
+		},
+		sellable_units: [
+			{
+				id: randomKey(),
+				price_per: 9,
+				weight_per: 0.25,
+				units_in_stock: 19
+			}, 
+			{
+				id: randomKey(),
+				price_per: 12,
+				weight_per: 0.5,
+				units_in_stock: 6
+			}, 
+			{
+				id: randomKey(),
+				price_per: 15,
+				weight_per: 2,
+				units_in_stock: 6
+			}
+		]
 	}
 ]
 

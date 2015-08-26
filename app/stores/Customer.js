@@ -17,14 +17,16 @@ var CustomerStore = {
 		}
 	},
 	addToCart: function( sellableUnitIDQuant ){
-		BaconDispatcher.handleAction({
-      actionType: FluxCartConstants.CART_ADD,
-      sku: sku,
-      update: update
-    })
+		// BaconDispatcher.handleAction({
+  //     actionType: FluxCartConstants.CART_ADD,
+  //     sku: sku,
+  //     update: update
+  //   })
+
+
 		_cart.push( sellableUnitIDQuant );
-		PageParent.refreshState();
-		debugger;
+
+
 	},
 	removeFromCart: function(){
 

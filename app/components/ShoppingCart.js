@@ -8,38 +8,52 @@ import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Table from 'react-bootstrap/lib/Table';
 
 import ProductsStore from '../stores/Products.js';
-
+var getPrice = require('../stores/Products.js').getPriceFromSellable;
+var getProduct = require('../stores/Products.js').getProductFromSellable;
 
 var ShoppingCart = React.createClass({
 	render: function () {
-		var total = 0;
-		let inCart = this.props.cart.map(function(item){
-			ProductsStore.getProductFromSellableId(item.id)
-		});	
+		var total = 0;	
 		let shoppingCartRows = this.props.cart.map(function (item) {
-			let pricePer = ProductsStore.getPriceFromSellable[item.id];
-			let price = pricePer * item.units;
+			let pricePer = getPrice(item.sellable_unit_id);
+			let price = pricePer * +item.quantity;
+			// debugger;
 			total += price;
-			let name = ProductsStore.getProductFromSellableId(item.id).name;
+			let name = getProduct(item.sellable_unit_id).name;
 			return ( 
 				<tr>
 					<td>
 						{ name }
 					</td>
 					<td>
-						{ item.units }
+						{ item.quantity }
 					</td>
 					<td>
-						{ price }
+						${ price }
 					</td>
 				</tr>
 			);
 		});
+		let totalRow = total > 0 ?
+			(
+				<tr>
+					<th>
+						Total Cost
+					</th>
+					<td>
+						
+					</td>
+					<td>
+						${total}
+					</td>
+				</tr>
+			) : '';
 
 		let shoppingOverlay = (
 			<Popover title={this.props.name + "'s Shopping Cart"}>
 				<Table responsive>
-					{shoppingCartRows}
+					{ shoppingCartRows }
+					{ totalRow }
 		    </Table>
 			</Popover>
 		);		

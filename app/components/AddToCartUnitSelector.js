@@ -9,13 +9,16 @@ import randomKey from '../utils/randomKeyGen.js';
 import range from 'lodash/utility/range.js';
 
 import CustomerStore from '../stores/Customer.js';
+var sellablesAreInStock = require('../stores/Products.js').sellablesAreInStock;
+
+
 
 var AddToCart = React.createClass({
 	getInitialState: function(){
 		return {
 			selected: this.props.sellable_units[0], 
 			open: false,
-			quantity: 0
+			quantity: 1
 		};
 	},
 	toggle: function(){
@@ -37,10 +40,15 @@ var AddToCart = React.createClass({
 		});
 	},
 	addToCart: function(){
-		CustomerStore.addToCart({
-			sellable_unit_id: this.state.selected.id,
-			quantity: this.state.quantity
-		});
+		let id = this.state.selected.id,
+			quantity = +this.state.quantity;
+		if ( sellablesAreInStock( id, quantity) ) {
+			CustomerStore.addToCart({
+				sellable_unit_id: id,
+				quantity: quantity
+			});
+			this.props.triggerParentRefresh();
+		}
 	},
 	render: function () {
 		let selected = this.state.selected;

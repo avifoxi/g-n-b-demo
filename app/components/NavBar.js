@@ -14,8 +14,8 @@ var NavBar = React.createClass({
 			<Navbar brand='TREIF AND MORE TREIF!' toggleNavKey={0}>
 				<CollapsibleNav eventKey={0}> 
 					<Nav navbar>
-			      <NavItem>Link</NavItem>
-			      <NavItem>Link</NavItem>
+			      <NavItem>Link?</NavItem>
+			      <NavItem>Link?</NavItem>
 		      </Nav> 
 		      <Nav navbar right>
 		      	<ShoppingCart name={this.props.name} cart={this.props.cart}/>

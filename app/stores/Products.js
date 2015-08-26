@@ -25,13 +25,12 @@ var ProductStore = {
 			sellableUnit = find(product.sellable_units, function(u){
 				return u.id === sellable_id;
 			});
-			debugger;
 		return sellableUnit.units_in_stock >= num;
 	}
 };
 
+// window.PSPS = ProductStore;
 module.exports = ProductStore;
-window.PSPS = ProductStore;
 
 function mapSellablesToProducts(){
 	var map = {};

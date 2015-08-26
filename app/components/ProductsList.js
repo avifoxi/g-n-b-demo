@@ -12,6 +12,8 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
 import Thumbnail from 'react-bootstrap/lib/Thumbnail';
+var Masonry = require('react-masonry-component')(React);
+
 
 // STORE / DATA IMPORTS
 import ProductStore from '../stores/Products.js';
@@ -48,7 +50,7 @@ var ProductsList = React.createClass({
             <h3>{ product.name }</h3>
             <p>{ product.description }</p>
             <p>
-              <AddToCart sellable_units={product.sellable_units} />
+              <AddToCart sellable_units={product.sellable_units} triggerParentRefresh={this.props.triggerParentRefresh}/>
               <ProductDetail product={product} />
             </p>
           </Thumbnail>
@@ -58,9 +60,9 @@ var ProductsList = React.createClass({
 
     return (
       <Grid>
-        <Row>
+        <Masonry>
           { productItems }
-        </Row>
+        </Masonry>
       </Grid>
     );
   }

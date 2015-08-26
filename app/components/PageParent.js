@@ -21,7 +21,7 @@ var PageParent = React.createClass({
 		return (
 			<div>
 				<NavBar name={this.state.customer.name} cart={this.state.customer.cart} />
-				<ProductsList products={this.state.products} />
+				<ProductsList products={this.state.products} triggerParentRefresh={ this.refreshState }/>
 			</div>
 		);
 	},
