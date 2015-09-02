@@ -111,6 +111,10 @@ var AddToCart = _react2['default'].createClass({
 				unit.price_per
 			);
 		}).bind(this));
+		var zIndexBump = {
+			zIndex: this.state.open ? 100 : 0
+		};
+		console.log(zIndexBump);
 		var quantityRange = (0, _lodashUtilityRangeJs2['default'])(0, this.state.selected.units_in_stock).map((function (num) {
 			return _react2['default'].createElement(
 				'option',
@@ -128,7 +132,7 @@ var AddToCart = _react2['default'].createClass({
 			),
 			_react2['default'].createElement(
 				_reactBootstrapLibPanel2['default'],
-				{ collapsible: true, expanded: this.state.open },
+				{ style: zIndexBump, collapsible: true, expanded: this.state.open },
 				_react2['default'].createElement(
 					_reactBootstrapLibInput2['default'],
 					{ type: 'select', label: 'Choose Your Type', value: this.state.selected.id, onChange: this.handleSelect },
@@ -289,6 +293,10 @@ var _reactBootstrapLibButton = require('react-bootstrap/lib/Button');
 
 var _reactBootstrapLibButton2 = _interopRequireDefault(_reactBootstrapLibButton);
 
+var _AddToCartUnitSelectorJs = require('./AddToCartUnitSelector.js');
+
+var _AddToCartUnitSelectorJs2 = _interopRequireDefault(_AddToCartUnitSelectorJs);
+
 var ProductDetail = _react2['default'].createClass({
 	displayName: 'ProductDetail',
 
@@ -341,7 +349,8 @@ var ProductDetail = _react2['default'].createClass({
 						null,
 						this.props.product.description
 					),
-					_react2['default'].createElement('hr', null)
+					_react2['default'].createElement('hr', null),
+					_react2['default'].createElement(_AddToCartUnitSelectorJs2['default'], { sellable_units: this.props.product.sellable_units, triggerParentRefresh: this.props.triggerParentRefresh })
 				),
 				_react2['default'].createElement(
 					_reactBootstrapLibModal2['default'].Footer,
@@ -359,7 +368,7 @@ var ProductDetail = _react2['default'].createClass({
 
 module.exports = ProductDetail;
 
-},{"react":348,"react-bootstrap/lib/Button":69,"react-bootstrap/lib/Modal":82}],6:[function(require,module,exports){
+},{"./AddToCartUnitSelector.js":2,"react":348,"react-bootstrap/lib/Button":69,"react-bootstrap/lib/Modal":82}],6:[function(require,module,exports){
 /**
  * List.js
  * In the Hello.js example, creates a list of elements
@@ -455,8 +464,7 @@ var ProductsList = _react2['default'].createClass({
           _react2['default'].createElement(
             'p',
             null,
-            _react2['default'].createElement(_AddToCartUnitSelectorJs2['default'], { sellable_units: product.sellable_units, triggerParentRefresh: this.props.triggerParentRefresh }),
-            _react2['default'].createElement(_ProductDetailJs2['default'], { product: product })
+            _react2['default'].createElement(_ProductDetailJs2['default'], { product: product, triggerParentRefresh: this.props.triggerParentRefresh })
           )
         )
       );
@@ -713,8 +721,8 @@ var _product_mock_data = [{
 	categories: ['Duck'],
 	description: 'Bacon ipsum dolor amet frankfurter ball tip venison corned beef, chuck shoulder sausage pig. Pastrami drumstick shank, spare ribs short loin tenderloin rump andouille cow. Swine chuck t-bone ground round. Ground round landjaeger alcatra, chicken capicola pastrami t-bone short ribs biltong jowl. Bresaola hamburger venison short ribs, frankfurter swine tongue salami bacon chicken.',
 	image_urls: {
-		hi_res: '/images/duck_bacon.jpeg',
-		thumb: '/images/duck_bacon.jpeg'
+		hi_res: './images/duck_bacon.jpeg',
+		thumb: './images/duck_bacon.jpeg'
 	},
 	sellable_units: [{
 		id: (0, _utilsRandomKeyGenJs2['default'])(),
@@ -737,8 +745,8 @@ var _product_mock_data = [{
 	category: ['Treif', 'Sale'],
 	description: 'Bacon ipsum dolor amet brisket cupim venison, beef jerky ground round hamburger shoulder sausage prosciutto porchetta flank meatloaf. Flank t-bone ham hock spare ribs, bresaola short ribs tail tri-tip ball tip turkey filet mignon brisket pork belly bacon. Swine prosciutto bacon, shank ball tip tenderloin sausage boudin biltong ham shankle tongue pork belly. Cupim beef corned beef bacon turducken porchetta t-bone cow. Bacon beef alcatra picanha. Ground round kielbasa pork loin pork belly ham sausage, meatball ribeye pastrami swine. Shank salami jerky, andouille shoulder kielbasa tenderloin pork belly rump hamburger flank cow sirloin drumstick.',
 	image_urls: {
-		hi_res: '/images/treif_bacon.jpeg',
-		thumb: '/images/treif_bacon.jpeg'
+		hi_res: './images/treif_bacon.jpeg',
+		thumb: './images/treif_bacon.jpeg'
 	},
 	sellable_units: [{
 		id: (0, _utilsRandomKeyGenJs2['default'])(),
@@ -761,8 +769,8 @@ var _product_mock_data = [{
 	category: ['Beef'],
 	description: 'Pork chop venison drumstick landjaeger, boudin meatloaf pork belly pork loin ball tip hamburger turducken shank salami bresaola jerky. Cupim corned beef meatloaf, pork loin leberkas fatback hamburger salami tongue tail turkey cow. Filet mignon tenderloin porchetta salami shoulder, capicola kevin beef ribs pancetta short loin pastrami andouille kielbasa pork leberkas. Short loin pork belly jerky picanha frankfurter porchetta shank chuck filet mignon sausage tenderloin meatloaf. Leberkas corned beef prosciutto venison pork loin pancetta frankfurter chicken fatback ground round. Spare ribs frankfurter jowl t-bone pork chop jerky andouille meatball flank, ham hock short ribs pork loin venison. Landjaeger chicken doner strip steak salami bacon cow prosciutto.',
 	image_urls: {
-		hi_res: '/images/beef_bacon.jpg',
-		thumb: '/images/beef_bacon.jpg'
+		hi_res: './images/beef_bacon.jpg',
+		thumb: './images/beef_bacon.jpg'
 	},
 	sellable_units: [{
 		id: (0, _utilsRandomKeyGenJs2['default'])(),
@@ -785,8 +793,8 @@ var _product_mock_data = [{
 	category: ['Turkey', 'Sale'],
 	description: 'Bacon ipsum dolor amet beef ribs jowl filet mignon flank short ribs frankfurter. Spare ribs drumstick ground round pork loin ham, shankle short loin. Tail tongue capicola, brisket bacon kevin doner ham. Kevin leberkas pork boudin. Brisket strip steak cow, spare ribs meatloaf jerky short ribs pork chop shank picanha ham short loin flank pig chicken.',
 	image_urls: {
-		hi_res: '/images/turkey_bacon.jpeg',
-		thumb: '/images/turkey_bacon.jpeg'
+		hi_res: './images/turkey_bacon.jpeg',
+		thumb: './images/turkey_bacon.jpeg'
 	},
 	sellable_units: [{
 		id: (0, _utilsRandomKeyGenJs2['default'])(),
